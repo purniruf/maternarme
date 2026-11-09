@@ -3,7 +3,8 @@
   "use strict";
   var doc = document.documentElement;
   doc.classList.add("js");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduce = false; // la marca pidió animaciones visibles siempre
+  var soft = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0.5 : 1;
 
   /* Año del footer */
   var y = document.getElementById("year");
@@ -29,15 +30,47 @@
 
   /* Revelado al hacer scroll */
   var reveals = document.querySelectorAll(".reveal");
-  if (reduce || !("IntersectionObserver" in window)) {
+  if (!("IntersectionObserver" in window)) {
     reveals.forEach(function (el) { el.classList.add("is-in"); });
   } else {
+    function show(el) {
+      el.classList.add("is-in");
+      // al terminar, se liberan las clases para que el hover funcione normal
+      var d = parseFloat(getComputedStyle(el).getPropertyValue("--d")) || 0;
+      setTimeout(function () {
+        Array.prototype.slice.call(el.classList).forEach(function (c) {
+          if (c === "is-in" || c.indexOf("reveal") === 0) el.classList.remove(c);
+        });
+      }, 2400 + d * 1000);
+    }
+    // Los elementos con máscara (clip-path) se activan observando a su contenedor
+    var targets = new Map();
+    reveals.forEach(function (el) {
+      var masked = el.classList.contains("reveal--title") || el.classList.contains("reveal--mask");
+      var t = masked ? el.parentElement : el;
+      if (!targets.has(t)) targets.set(t, []);
+      targets.get(t).push(el);
+    });
+    function reveal(t) {
+      if (!targets.has(t)) return;
+      targets.get(t).forEach(function (el) { if (!el.classList.contains("is-in")) show(el); });
+      targets.delete(t);
+      if (io) io.unobserve(t);
+    }
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
-      });
+      entries.forEach(function (en) { if (en.isIntersecting) reveal(en.target); });
     }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-    reveals.forEach(function (el) { io.observe(el); });
+    targets.forEach(function (_, t) { io.observe(t); });
+    // Respaldo por posición (navegadores o vistas donde el observer no dispara)
+    window.checkReveals = function () {
+      var vh = window.innerHeight;
+      targets.forEach(function (_, t) {
+        var r = t.getBoundingClientRect();
+        if (r.top < vh * 0.9 && r.bottom > 0) reveal(t);
+      });
+    };
+    window.addEventListener("load", window.checkReveals);
+    setTimeout(window.checkReveals, 300);
   }
 
   /* Sección activa en el menú */
@@ -62,50 +95,29 @@
       var r = el.getBoundingClientRect();
       if (r.bottom < -200 || r.top > vh + 200) return;
       var speed = parseFloat(el.getAttribute("data-parallax")) || 0;
-      var offset = (r.top + r.height / 2 - vh / 2) * speed;
-      var base = el.classList.contains("hero__giant") ? "translateX(-50%) " : "";
-      el.style.transform = base + "translate3d(0," + offset.toFixed(1) + "px,0)";
+      var offset = (r.top + r.height / 2 - vh / 2) * speed * soft;
+      el.style.translate = "0 " + offset.toFixed(1) + "px";
     });
     ticking = false;
   }
+  /* Barra de progreso, header que se oculta y cinta que reacciona al scroll */
+  var progress = document.getElementById("progress");
+  var track = document.querySelector(".marquee__track");
+  var lastY = window.scrollY, shift = 0;
+  function onScrollFx() {
+    var y = window.scrollY, max = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) progress.style.setProperty("--p", max > 0 ? (y / max).toFixed(4) : 0);
+    var down = y > lastY;
+    header.classList.toggle("is-hidden", down && y > 400 && !nav.classList.contains("is-open"));
+    if (track && !reduce) { shift += (y - lastY) * 0.25; track.style.translate = (-shift % 400).toFixed(1) + "px 0"; }
+    lastY = y;
+  }
   window.addEventListener("scroll", function () {
     onScrollHeader();
+    onScrollFx();
+    if (window.checkReveals) window.checkReveals();
     if (!reduce && px.length && !ticking) { ticking = true; requestAnimationFrame(parallax); }
   }, { passive: true });
   if (!reduce) parallax();
 
-  /* Pausa de respiración (4s inhala · 6s exhala · 6 ciclos ≈ 1 min) */
-  var btn = document.getElementById("breathBtn");
-  var circle = document.getElementById("breathCircle");
-  var label = document.getElementById("breathLabel");
-  var status = document.getElementById("breathStatus");
-  var timer = null, cycles = 0, running = false;
-  function stopBreath(done) {
-    clearTimeout(timer); running = false; cycles = 0;
-    circle.classList.remove("is-in", "is-out");
-    label.textContent = done ? "Gracias" : "Lista";
-    btn.textContent = done ? "Repetir pausa" : "Comenzar pausa";
-    btn.setAttribute("aria-pressed", "false");
-    if (done) status.textContent = "Pausa terminada. Gracias por regalarte este minuto.";
-  }
-  function inhale() {
-    if (!running) return;
-    if (cycles >= 6) { stopBreath(true); return; }
-    cycles++;
-    circle.classList.remove("is-out"); circle.classList.add("is-in");
-    label.textContent = "Inhala"; status.textContent = "Inhala";
-    timer = setTimeout(exhale, 4000);
-  }
-  function exhale() {
-    if (!running) return;
-    circle.classList.remove("is-in"); circle.classList.add("is-out");
-    label.textContent = "Exhala"; status.textContent = "Exhala";
-    timer = setTimeout(inhale, 6000);
-  }
-  if (btn) btn.addEventListener("click", function () {
-    if (running) { stopBreath(false); return; }
-    running = true; cycles = 0;
-    btn.textContent = "Detener"; btn.setAttribute("aria-pressed", "true");
-    inhale();
-  });
 })();

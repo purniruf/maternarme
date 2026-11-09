@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
   <a class="skip" href="#contenido">Saltar al contenido</a>
 
   <!-- ================= HEADER ================= -->
@@ -42,7 +43,6 @@
 
     <!-- ================= HERO ================= -->
     <section class="hero" id="inicio">
-      <div class="hero__giant" aria-hidden="true" data-parallax="0.12">VUELVE A TI</div>
       <div class="container hero__grid">
         <div class="hero__copy">
           <p class="pill reveal"><span class="dot"></span>Espacio de cuidado consciente</p>
@@ -58,8 +58,8 @@
           </div>
         </div>
         <div class="hero__art reveal reveal--fade" style="--d:.2s">
-          <img class="hero__braces" src="assets/img/llaves.png" alt="" width="1400" height="876" aria-hidden="true">
-          <img class="hero__woman float" src="assets/img/mujer-abrazo.png" alt="Ilustración de una mujer que se abraza a sí misma con un corazón en el pecho" width="1000" height="1347" fetchpriority="high">
+          <img class="hero__braces" data-parallax="0.05" src="assets/img/llaves.png" alt="" width="1400" height="876" aria-hidden="true">
+          <img class="hero__woman float" data-parallax="-0.1" src="assets/img/mujer-abrazo.png" alt="Ilustración de una mujer que se abraza a sí misma con un corazón en el pecho" width="1000" height="1347" fetchpriority="high">
         </div>
       </div>
       <a href="#nombra" class="scroll-cue" aria-label="Bajar a la siguiente sección">
@@ -78,16 +78,16 @@
     <!-- ================= LO QUE NADIE NOMBRA ================= -->
     <section class="section nombra" id="nombra">
       <div class="container nombra__grid">
-        <div class="nombra__art reveal reveal--fade">
+        <div class="nombra__art reveal reveal--mask">
           <img src="assets/img/mujer-agobio.png" alt="Ilustración de una mujer que se cubre el rostro con una nube de pensamientos sobre la cabeza" width="560" height="1736" loading="lazy" data-parallax="-0.06">
         </div>
         <div>
           <p class="eyebrow reveal">Lo que nadie nombra</p>
           <ol class="nombra__list">
-            <li class="reveal"><span>01</span>Estás cansada.</li>
-            <li class="reveal" style="--d:.12s"><span>02</span>A veces sientes culpa.</li>
-            <li class="reveal" style="--d:.24s"><span>03</span>Te exiges más de lo que puedes dar.</li>
-            <li class="reveal" style="--d:.36s"><span>04</span>Y aun así sigues.</li>
+            <li class="reveal reveal--left"><span>01</span>Estás cansada.</li>
+            <li class="reveal reveal--left" style="--d:.12s"><span>02</span>A veces sientes culpa.</li>
+            <li class="reveal reveal--left" style="--d:.24s"><span>03</span>Te exiges más de lo que puedes dar.</li>
+            <li class="reveal reveal--left" style="--d:.36s"><span>04</span>Y aun así sigues.</li>
           </ol>
           <p class="nombra__close reveal">No estás fallando. <em>Estás sosteniendo demasiado sola.</em></p>
         </div>
@@ -100,7 +100,7 @@
         <div class="enfoque__head">
           <div>
             <p class="eyebrow reveal">Nuestro enfoque</p>
-            <h2 class="h2 reveal">¿Qué es <span class="script script--pink">Maternar(me)</span>?</h2>
+            <h2 class="h2 reveal reveal--title">¿Qué es <span class="script script--pink">Maternar(me)</span>?</h2>
           </div>
           <div class="enfoque__text">
             <p class="reveal">Es un refugio para la mujer que también es mamá. Un lugar donde nombramos y validamos la carga emocional, física y económica de maternar, muchas veces sin red de apoyo.</p>
@@ -108,22 +108,22 @@
           </div>
         </div>
         <div class="cards4">
-          <article class="card4 reveal">
+          <article class="card4 reveal reveal--scale">
             <svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z"/></svg>
             <h3>Salud mental</h3>
             <p>Herramientas sencillas, respaldadas por la psicología, para entender lo que sientes.</p>
           </article>
-          <article class="card4 card4--lime reveal" style="--d:.1s">
+          <article class="card4 card4--lime reveal reveal--scale" style="--d:.1s">
             <svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z"/></svg>
             <h3>Crianza sin culpa</h3>
             <p>Soltar la exigencia de ser perfecta para criar desde la presencia, no desde el miedo.</p>
           </article>
-          <article class="card4 card4--lav reveal" style="--d:.2s">
+          <article class="card4 card4--lav reveal reveal--scale" style="--d:.2s">
             <svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z"/></svg>
             <h3>Comunidad</h3>
             <p>Otras madres que entienden, sin comparaciones. Aquí nadie tiene que hacerlo sola.</p>
           </article>
-          <article class="card4 card4--olive reveal" style="--d:.3s">
+          <article class="card4 card4--olive reveal reveal--scale" style="--d:.3s">
             <svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z"/></svg>
             <h3>Pausas guiadas</h3>
             <p>Momentos breves para respirar, regularte y volver a tu centro en medio del día.</p>
@@ -137,9 +137,9 @@
       <div class="container guia__grid">
         <div class="guia__copy">
           <p class="eyebrow eyebrow--lime reveal">Recordatorio para hoy</p>
-          <h2 class="h2 h2--light reveal">Cuidarte también es un <span class="script script--lime">acto de amor</span></h2>
+          <h2 class="h2 h2--light reveal reveal--title">Cuidarte también es un <span class="script script--lime">acto de amor</span></h2>
           <p class="guia__lead reveal">La <strong>Guía Digital Maternar(me)</strong> es un acompañamiento práctico para maternar con amor propio: entender tu cansancio, regular la culpa y recuperar pequeños espacios para ti.</p>
-          <img class="guia__art reveal reveal--fade" src="assets/img/meditacion.png" alt="Ilustración de una mujer embarazada meditando entre llaves" width="1000" height="538" loading="lazy">
+          <img class="guia__art reveal reveal--mask" data-parallax="-0.06" src="assets/img/meditacion.png" alt="Ilustración de una mujer embarazada meditando entre llaves" width="1000" height="538" loading="lazy">
         </div>
 
         <article class="product reveal" style="--d:.15s" aria-labelledby="product-title">
@@ -167,40 +167,29 @@
       <div class="container">
         <div class="center-head">
           <p class="eyebrow reveal">Espacio de apoyo</p>
-          <h2 class="h2 reveal">No tienes que hacerlo <span class="script script--pink">sola</span></h2>
+          <h2 class="h2 reveal reveal--title">No tienes que hacerlo <span class="script script--pink">sola</span></h2>
         </div>
 
-        <div class="pausa__grid">
-          <!-- respiración -->
-          <article class="breath reveal" aria-labelledby="breath-title">
-            <h3 id="breath-title" class="h3">Una pausa de un minuto</h3>
-            <p>Sigue el círculo. Inhala mientras crece, exhala mientras se hace pequeño.</p>
-            <div class="breath__stage">
-              <div class="breath__circle" id="breathCircle"><span id="breathLabel">Lista</span></div>
-            </div>
-            <button class="btn btn--ghost btn--sm" id="breathBtn" type="button" aria-pressed="false">Comenzar pausa</button>
-            <p class="breath__status sr-only" id="breathStatus" aria-live="polite"></p>
-          </article>
-
+        <div class="pausa__single">
           <!-- recurso gratuito -->
-          <article class="free reveal" style="--d:.12s">
+          <article class="free reveal reveal--scale">
             <div class="free__copy">
               <p class="free__tag">Recurso gratuito · PDF · 5 páginas</p>
               <h3 class="free__title">3 ejercicios para regular <span class="script">la culpa materna</span></h3>
               <p>Herramientas breves, respaldadas por la psicología, para transformar la culpa en compasión.</p>
               <a class="btn btn--pink" href="../culpa-materna/" target="_blank" rel="noopener">Obtener la guía gratuita</a>
             </div>
-            <img class="free__art" src="assets/img/mujer-planta.png" alt="Ilustración de una mujer que riega las plantas que crecen en su cabeza" width="900" height="953" loading="lazy">
+            <img class="free__art" data-parallax="-0.08" src="assets/img/mujer-planta.png" alt="Ilustración de una mujer que riega las plantas que crecen en su cabeza" width="900" height="953" loading="lazy">
           </article>
         </div>
 
         <div class="community">
-          <a class="comm reveal" href="https://www.facebook.com/profile.php?id=61590217118830" target="_blank" rel="noopener">
+          <a class="comm reveal reveal--scale" href="https://www.facebook.com/profile.php?id=61590217118830" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9H17l.5-4h-4V8.8c0-.5.3-.8.5-.8z"/></svg>
             <div><h3>Facebook</h3><p>Reflexiones y acompañamiento para la comunidad Maternar(me).</p></div>
             <span class="comm__go">Seguir en Facebook <i aria-hidden="true">→</i></span>
           </a>
-          <a class="comm comm--ig reveal" style="--d:.1s" href="https://www.instagram.com/maternar_m.e" target="_blank" rel="noopener">
+          <a class="comm comm--ig reveal reveal--scale" style="--d:.1s" href="https://www.instagram.com/maternar_m.e" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" class="fill"/></svg>
             <div><h3>Instagram</h3><p>Pausas, recordatorios y reflexiones para tu día a día.</p></div>
             <span class="comm__go">Seguir @maternar_m.e <i aria-hidden="true">→</i></span>
@@ -215,7 +204,7 @@
         <div class="historia__grid">
           <div>
             <p class="eyebrow reveal">Nuestra historia</p>
-            <h2 class="h2 reveal">¿Por qué <span class="script script--pink">existimos</span>?</h2>
+            <h2 class="h2 reveal reveal--title">¿Por qué <span class="script script--pink">existimos</span>?</h2>
           </div>
           <div class="historia__text">
             <p class="reveal">Maternar(me) nació como <em>Nutriendo Papás</em>, con el deseo de acompañar a las familias. En el camino entendimos algo que casi nadie dice en voz alta: <strong>muchas madres sostienen solas</strong> la carga emocional, física y económica de criar.</p>
@@ -223,22 +212,22 @@
           </div>
         </div>
       </div>
-      <div class="historia__busts reveal reveal--fade">
+      <div class="historia__busts reveal reveal--rise">
         <img src="assets/img/bustos.png" alt="Ilustración de cinco mujeres de distintos colores, juntas" width="1600" height="845" loading="lazy" data-parallax="0.05">
       </div>
     </section>
 
     <section class="section creemos">
       <div class="container">
-        <h2 class="h2 reveal">Creemos <span class="script script--pink">que…</span></h2>
+        <h2 class="h2 reveal reveal--title">Creemos <span class="script script--pink">que…</span></h2>
         <div class="quotes">
           <blockquote class="quote reveal">Una madre que se cuida no es egoísta: es una madre que se queda.</blockquote>
           <blockquote class="quote reveal" style="--d:.1s">Pedir ayuda es un acto de fortaleza, no de debilidad.</blockquote>
         </div>
         <div class="values">
-          <article class="value reveal"><span class="value__n">01</span><h3>Responsabilidad ética</h3><p>Hablamos con honestidad y desde fuentes confiables. Nuestro contenido acompaña, pero no reemplaza a un profesional.</p></article>
-          <article class="value reveal" style="--d:.1s"><span class="value__n">02</span><h3>Amor consciente</h3><p>Criar con presencia empieza por tratarte con la misma ternura que das a los tuyos.</p></article>
-          <article class="value reveal" style="--d:.2s"><span class="value__n">03</span><h3>Acompañamiento sin juicio</h3><p>Aquí no hay madres perfectas, hay mujeres reales. Llegas como estás.</p></article>
+          <article class="value reveal reveal--scale"><span class="value__n">01</span><h3>Responsabilidad ética</h3><p>Hablamos con honestidad y desde fuentes confiables. Nuestro contenido acompaña, pero no reemplaza a un profesional.</p></article>
+          <article class="value reveal reveal--scale" style="--d:.1s"><span class="value__n">02</span><h3>Amor consciente</h3><p>Criar con presencia empieza por tratarte con la misma ternura que das a los tuyos.</p></article>
+          <article class="value reveal reveal--scale" style="--d:.2s"><span class="value__n">03</span><h3>Acompañamiento sin juicio</h3><p>Aquí no hay madres perfectas, hay mujeres reales. Llegas como estás.</p></article>
         </div>
       </div>
     </section>
@@ -259,9 +248,9 @@
     <!-- ================= CTA FINAL ================= -->
     <section class="section final">
       <div class="container final__grid">
-        <img class="final__art reveal reveal--fade" src="assets/img/brazos-arriba.png" alt="Ilustración de una mujer sonriente con los brazos en alto" width="800" height="980" loading="lazy">
+        <img class="final__art reveal reveal--mask" data-parallax="-0.06" src="assets/img/brazos-arriba.png" alt="Ilustración de una mujer sonriente con los brazos en alto" width="800" height="980" loading="lazy">
         <div>
-          <h2 class="h2 reveal">¿Lista para volver <span class="script script--pink">a encontrarte?</span></h2>
+          <h2 class="h2 reveal reveal--title">¿Lista para volver <span class="script script--pink">a encontrarte?</span></h2>
           <p class="final__lead reveal">Da el primer paso hoy. Pequeño, posible y a tu ritmo.</p>
           <div class="hero__ctas reveal">
             <a class="btn btn--pink" href="https://pay.hotmart.com/B108404202Y?bid=1794198528994" target="_blank" rel="noopener">Comenzar mi proceso</a>
